@@ -1,0 +1,19 @@
+[en]
+
+SAVE_MSG = &x01You need to use the commands&x06 /reset&x01 or&x06 /respawn&x01 to use&x06 /save&x01 again.
+
+[bp]
+
+SAVE_MSG= &x01Você precisa usar os comandos&x06 /reset&x01 ou&x06 /respawn&x01 para usar&x06 /save&x01 novamente.
+
+[pt]
+
+SAVE_MSG = &x01Você precisa usar os comandos&x06 /reset&x01 ou&x06 /respawn&x01 para usar&x06 /save&x01 novamente.
+
+[ro]
+
+SAVE_MSG = &x01Trebuie să folosești comenzile&x06 /reset&x01 sau&x06 /respawn&x01 pentru a putea utiliza din nou&x06 /save&x01.
+
+[es]
+
+SAVE_MSG = &x01Necesitas usar los comandos&x06 /reset&x01 o&x06 /respawn&x01 para poder utilizar&x06 /save&x01 nuevamente.
