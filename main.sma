@@ -63,6 +63,7 @@ public plugin_init()
 	CC_SetPrefix("&x04[FWO]");
 }
 
+
 public plugin_natives(){
 	register_library("main");
 
@@ -155,6 +156,10 @@ public Respawn(id){
 }
 
 public SaveStart(id){
+	if (cs_get_user_team(id) != CS_TEAM_CT || !is_user_alive(id)){
+		CC_SendMessage(id, "&x01Você precisa estar vivo para usar este comando.");
+		return PLUGIN_HANDLED;
+	}
 	if(used_save[id]){
 		CC_SendMessage(id, "&x01You need to use the commands&x06 /reset&x01 or&x06 /respawn&x01 to use&x06 /save&x01 again!");
 		return PLUGIN_HANDLED;
@@ -167,9 +172,14 @@ public SaveStart(id){
 }
 
 public ResetStart(id){
+	if (cs_get_user_team(id) != CS_TEAM_CT || !is_user_alive(id)){
+		CC_SendMessage(id, "&x01Você precisa estar vivo para usar este comando.");
+		return PLUGIN_HANDLED;
+	}
 	start_position[id][0] = 0;
 	used_save[id] = false;
 	ExecuteHamB ( Ham_CS_RoundRespawn , id );
+	return PLUGIN_HANDLED;
 }
 
 public GiveWeapons(id){
@@ -187,7 +197,7 @@ public Spec(id)
 {
 	if (cs_get_user_team(id) == CS_TEAM_SPECTATOR){
 		cs_set_user_team(id, CS_TEAM_CT, CS_DONTCHANGE);
-		set_task(1.0, "Respawn", id);
+		set_task(0.1, "Respawn", id);
 	}
 	else{
 		cs_set_user_team(id, CS_TEAM_SPECTATOR, CS_DONTCHANGE);
@@ -243,8 +253,3 @@ stock SetUserAgl(id,Float:agl[3]){
 	entity_set_vector(id,EV_VEC_angles,agl);
 	//entity_set_int(id,EV_INT_fixangle,1);
 }
-
-	
-/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
-*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1046\\ f0\\ fs16 \n\\ par }
-*/
