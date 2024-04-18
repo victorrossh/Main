@@ -159,14 +159,14 @@ public Respawn(id){
 }
 
 public SaveStart(id){
-	if (cs_get_user_team(id) != CS_TEAM_CT || !is_user_alive(id)){
+	if (!is_user_alive(id)){
 		CC_SendMessage(id, "%L",id, "MSG_DONT_ALIVE");
 		//CC_SendMessage(id, "&x01Você precisa estar vivo para usar este comando.");
 		return PLUGIN_HANDLED;
 	}
 	if(used_save[id]){
 		//CC_SendMessage(id, "&x01You need to use the commands&x06 /reset&x01 or&x06 /respawn&x01 to use&x06 /save&x01 again!");
-		CC_SendMessage(id, "%L",id, "SAVE_MSG");
+		CC_SendMessage(id, "%L",id, "MSG_SAVE");
 		return PLUGIN_HANDLED;
 	}
 	get_user_origin(id, start_position[id], 0);
@@ -177,7 +177,7 @@ public SaveStart(id){
 }
 
 public ResetStart(id){
-	if (cs_get_user_team(id) != CS_TEAM_CT || !is_user_alive(id)){
+	if (!is_user_alive(id)){
 		CC_SendMessage(id, "%L",id, "MSG_DONT_ALIVE");
 		//CC_SendMessage(id, "&x01Você precisa estar vivo para usar este comando.");
 		return PLUGIN_HANDLED;
