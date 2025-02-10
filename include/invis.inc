@@ -1,0 +1,1 @@
+native invis_menu(id);

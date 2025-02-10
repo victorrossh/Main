@@ -5,7 +5,7 @@
 #include <amxmisc>
 #include <hamsandwich>
 #include <engine>
-#include <cromchat>
+#include <cromchat2>
 #include <timer>
 #include <hamsandwich>
 
@@ -160,13 +160,18 @@ public Respawn(id){
 
 public SaveStart(id){
 	if (!is_user_alive(id)){
-		CC_SendMessage(id, "%L",id, "MSG_NOT_ALIVE");
+		CC_SendMessage(id, "%L", id, "MSG_NOT_ALIVE");
 		//CC_SendMessage(id, "&x01Você precisa estar vivo para usar este comando.");
 		return PLUGIN_HANDLED;
 	}
 	if(used_save[id]){
 		//CC_SendMessage(id, "&x01You need to use the commands&x06 /reset&x01 or&x06 /respawn&x01 to use&x06 /save&x01 again!");
-		CC_SendMessage(id, "%L",id, "MSG_SAVE");
+		CC_SendMessage(id, "%L", id, "MSG_USED");
+		return PLUGIN_HANDLED;
+	}
+
+	if(get_user_rule_speedrun(id) && !entity_intersects(id, get_entity_start())){
+		CC_SendMessage(id, "%L", id, "MSG_OUTSIDE_ZONE");
 		return PLUGIN_HANDLED;
 	}
 	get_user_origin(id, start_position[id], 0);

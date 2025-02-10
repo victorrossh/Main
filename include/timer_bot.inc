@@ -1,0 +1,1 @@
+native open_bot_menu(id);
