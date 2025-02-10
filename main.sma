@@ -94,7 +94,7 @@ public native_save_point(numParams){
 
 public native_bool_save_point(numParams){
 	new id = get_param(1);
-	isStartSaved[id];
+	return isStartSaved[id];
 }
 
 public client_putinserver(id){
