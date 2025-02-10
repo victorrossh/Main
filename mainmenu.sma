@@ -1,5 +1,4 @@
 #include <amxmodx>
-
 #include <main>
 #include <hud>
 #include <timer>
@@ -7,10 +6,16 @@
 #include <medals>
 #include <invis>
 #include <shop>
+#include <commands>
+
+#define PLUGIN "Main menu"
+#define VERSION "1.1"
+#define AUTHOR "ftl~"
 
 public plugin_init()
 {
-	register_plugin( "Menu", "1.1", "ftl~" );
+	register_plugin(PLUGIN, VERSION, AUTHOR);
+
 	register_clcmd( "say /menu", "bhop_menu" ); 
 	register_clcmd( "chooseteam", "bhop_menu" );
 	register_clcmd("say /savemenu", "save_menu" );
@@ -24,19 +29,19 @@ public client_putinserver(id)
 public bhop_menu(id)
 {
 	new title[64];
-	formatex(title, 63, "\r[BHOP] \d- \wMain Menu");
+	formatex(title, 63, "\r[FWO] \d- \wMain Menu");
 	new menu = menu_create(title, "MenuHandler");
 	
 	menu_additem( menu, "\wStart", "1");
-	menu_additem( menu, "\wInvis \rMenu", "2");
-	menu_additem( menu, "\wHud \rMenu", "3");
-	menu_additem( menu, "\yMedals \rMenu", "4");
-	menu_additem( menu, "\wCategories \rMenu", "5");
-	menu_additem( menu, "\wTop \rMenu", "6");
-	menu_additem( menu, "\yShop", "7");
-	menu_additem( menu, "\wBot \rMenu", "8");
-	menu_additem( menu, "", "");
-	menu_additem( menu, "\wExit", "9");
+	menu_additem( menu, "\wTop Menu", "2");
+	menu_additem( menu, "\wCategories Menu", "3");
+	menu_additem( menu, "\wBot Menu", "4");
+	menu_additem( menu, "\wShop", "5");
+	menu_additem( menu, "\wInvis Menu", "6");
+	menu_additem( menu, "\wHud Menu", "7");
+	menu_additem( menu, "\wMedals Menu", "8");
+	menu_additem( menu, "\wHelp^n", "9");
+	menu_additem( menu, "\wExit", "0");
 
 	menu_setprop(menu, MPROP_PERPAGE, 0);
 
@@ -55,18 +60,14 @@ public MenuHandler(id , menu, item)
 	switch(item)
 	{
 		case 0: spawn_player(id);
-		case 1: invis_menu(id);
-		case 2: open_hud_menu(id);
-		case 3: open_medals_menu(id);
-		case 4: open_cat_menu(id);
-		case 5: open_top_menu(id);
-		case 6: open_shop_menu(id);
-		case 7: open_bot_menu(id);
-		case 8:
-		{
-			menu_destroy(menu);
-			return PLUGIN_HANDLED;
-		}
+		case 1: open_top_menu(id);
+		case 2: open_cat_menu(id);
+		case 3: open_bot_menu(id);
+		case 4: open_shop_menu(id);
+		case 5: invis_menu(id);
+		case 6: open_hud_menu(id);
+		case 7: open_medals_menu(id);
+		case 8: motd_commands(id);
 		case 9:
 		{
 			menu_destroy(menu);

@@ -1,0 +1,1 @@
+native motd_commands(id);
