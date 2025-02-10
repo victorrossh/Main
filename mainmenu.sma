@@ -101,8 +101,3 @@ public MenuHandler(id , menu, item)
 	menu_destroy(menu);
 	return PLUGIN_HANDLED;
 }
-
-
-/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
-*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1046\\ f0\\ fs16 \n\\ par }
-*/
