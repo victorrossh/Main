@@ -3,6 +3,7 @@
 MSG_USED = &x01You need to use the command &x06/reset&x01 to use&x06 /save&x01 again.
 MSG_NOT_ALIVE = &x01You must be alive to use this command.
 MSG_OUTSIDE_ZONE = &x01You must be inside the start zone to use this command.
+MSG_SPEED = &x01You must stay still in order to use this command.
 
 [bp]
 
@@ -19,6 +20,7 @@ MSG_NOT_ALIVE = &x01Você precisa estar vivo para usar este comando.
 MSG_USED = &x01Trebuie să folosești comanda&x06 /reset&x01 pentru a folosi din nou&x06 /save.
 MSG_NOT_ALIVE = &x01Trebuie să fii în viață pentru a folosi această comandă.
 MSG_OUTSIDE_ZONE = &x01Trebuie să fii în interiorul zonei de start pentru a folosi această comandă.
+MSG_SPEED = &x01Trebuie să stai pe loc pentru a folosi această comandă.
 
 [es]
 

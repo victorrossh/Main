@@ -170,10 +170,18 @@ public SaveStart(id){
 		return PLUGIN_HANDLED;
 	}
 
-	if(get_user_rule_speedrun(id) && !entity_intersects(id, get_entity_start())){
-		CC_SendMessage(id, "%L", id, "MSG_OUTSIDE_ZONE");
-		return PLUGIN_HANDLED;
+	if(get_user_rule_speedrun(id)){
+		if(!entity_intersects(id, get_entity_start())){
+			CC_SendMessage(id, "%L", id, "MSG_OUTSIDE_ZONE");
+			return PLUGIN_HANDLED;
+		}
+
+		if(get_speed(id)){
+			CC_SendMessage(id, "%L", id, "MSG_SPEED");
+			return PLUGIN_HANDLED;
+		}
 	}
+	
 	get_user_origin(id, start_position[id], 0);
 	entity_get_vector(id, EV_VEC_angles, start_angles[id]);
 	start_angles[id][0] *= -3.0;
