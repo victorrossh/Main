@@ -9,7 +9,9 @@
 #include <timer>
 #include <hamsandwich>
 
-#define VERSION		"1.0"
+#define PLUGIN "Main bhop"
+#define VERSION "1.0"
+#define AUTHOR "MrShark45"
 
 #define MAX_PLAYERS 32
 
@@ -32,7 +34,7 @@ new bool:isStartSaved[33];
 
 public plugin_init()
 {
-	register_plugin("Main bhop", VERSION, "MrShark45");
+	register_plugin(PLUGIN, VERSION, AUTHOR);
 
 	set_msg_block(get_user_msgid("ClCorpse"), BLOCK_SET);
 
@@ -114,15 +116,15 @@ public timer_player_category_changed(id){
 
 public PreSpawn(id){
 	if( pev_valid(id) == 2 && (1 <= get_pdata_int(id, m_iTeam) <= 2) )
-    {
-        set_pdata_bool(id, m_bHasReceivedDefItems, true);
-        new weapons = pev(id, pev_weapons);
-        if( ~weapons & WEAPON_SUIT_BIT )
-        {
-            set_pev(id, pev_weapons, weapons | WEAPON_SUIT_BIT);
-        }
-        return HAM_HANDLED;
-    }
+	{
+		set_pdata_bool(id, m_bHasReceivedDefItems, true);
+		new weapons = pev(id, pev_weapons);
+		if( ~weapons & WEAPON_SUIT_BIT )
+		{
+			set_pev(id, pev_weapons, weapons | WEAPON_SUIT_BIT);
+		}
+		return HAM_HANDLED;
+	}
 	return HAM_IGNORED;
 }
 
@@ -220,8 +222,8 @@ public ResetStart(id){
 }
 
 public szSaveStatus(id){
-    isStartSaved[id] = (isStartSaved[id] != false) ? false : true;
-    return PLUGIN_HANDLED;
+	isStartSaved[id] = (isStartSaved[id] != false) ? false : true;
+	return PLUGIN_HANDLED;
 }
 
 public GiveWeapons(id){
