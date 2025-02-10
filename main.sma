@@ -28,6 +28,7 @@ new start_position[33][3];
 new Float:start_angles[33][3];
 new Float:start_velocity[33][3];
 new bool:used_save[33];
+new bool:isStartSaved[33];
 
 public plugin_init()
 {
@@ -71,11 +72,29 @@ public plugin_natives(){
 	register_library("main");
 
 	register_native("spawn_player", "native_spawn_player");
+	register_native("reset_save_player", "native_save_player");
+	register_native("get_bool_save_point", "native_bool_save_point");
+	register_native("get_user_save_point", "native_save_point");
 }
 
 public native_spawn_player(numParams){
 	new id = get_param(1);
 	Start(id);
+}
+
+public native_save_player(numParams){
+	new id = get_param(1);
+	ResetStart(id);
+}
+
+public native_save_point(numParams){
+	new id = get_param(1);
+	SaveStart(id);
+}
+
+public native_bool_save_point(numParams){
+	new id = get_param(1);
+	isStartSaved[id];
 }
 
 public client_putinserver(id){
@@ -184,6 +203,7 @@ public SaveStart(id){
 	entity_get_vector(id, EV_VEC_angles, start_angles[id]);
 	start_angles[id][0] *= -3.0;
 	get_user_velocity(id, start_velocity[id]);
+	isStartSaved[id] = true;
 	return PLUGIN_HANDLED;
 }
 
@@ -194,8 +214,14 @@ public ResetStart(id){
 	}
 	start_position[id][0] = 0;
 	used_save[id] = false;
+	isStartSaved[id] = false;
 	ExecuteHamB ( Ham_CS_RoundRespawn , id );
 	return PLUGIN_HANDLED;
+}
+
+public szSaveStatus(id){
+    isStartSaved[id] = (isStartSaved[id] != false) ? false : true;
+    return PLUGIN_HANDLED;
 }
 
 public GiveWeapons(id){
