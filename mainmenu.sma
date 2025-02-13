@@ -32,7 +32,7 @@ public bhop_menu(id)
 	formatex(title, 63, "\r[FWO] \d- \wMain Menu");
 	new menu = menu_create(title, "MenuHandler");
 	
-	menu_additem( menu, "\wStart", "1");
+	menu_additem( menu, "\wStartpoint", "1");
 	menu_additem( menu, "\wTop Menu", "2");
 	menu_additem( menu, "\wCategories Menu", "3");
 	menu_additem( menu, "\wBot Menu", "4");
@@ -59,7 +59,7 @@ public MenuHandler(id , menu, item)
  
 	switch(item)
 	{
-		case 0: spawn_player(id);
+		case 0: save_menu(id);
 		case 1: open_top_menu(id);
 		case 2: open_cat_menu(id);
 		case 3: open_bot_menu(id);
