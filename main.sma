@@ -47,7 +47,12 @@ public plugin_init()
 
 	register_clcmd( "say /start", "Start" );
 	register_clcmd( "say /reset", "ResetStart");
-	register_clcmd( "say /save", "SaveStart" );
+	register_clcmd( "save", "SaveStart");
+	register_clcmd( "say /save", "SaveMenu" );
+
+	register_clcmd("say /savemenu", "SaveMenu" );
+	register_clcmd("say /sv", "SaveMenu" ); // ?? sv?
+	register_clcmd("say /sm", "SaveMenu" );
 
 	register_clcmd( "say /respawn", "Respawn");
 
@@ -75,8 +80,7 @@ public plugin_natives(){
 
 	register_native("spawn_player", "native_spawn_player");
 	register_native("reset_save_player", "native_save_player");
-	register_native("get_bool_save_point", "native_bool_save_point");
-	register_native("get_user_save_point", "native_save_point");
+	register_native("open_save_menu", "native_open_save_menu"); // GET??? What do you mean GET? you SET the save point
 }
 
 public native_spawn_player(numParams){
@@ -89,15 +93,11 @@ public native_save_player(numParams){
 	ResetStart(id);
 }
 
-public native_save_point(numParams){
+public native_open_save_menu(numParams){
 	new id = get_param(1);
-	SaveStart(id);
+	SaveMenu(id);
 }
 
-public native_bool_save_point(numParams){
-	new id = get_param(1);
-	return isStartSaved[id];
-}
 
 public client_putinserver(id){
 	start_position[id][0] = 0;
@@ -220,6 +220,56 @@ public ResetStart(id){
 	ExecuteHamB ( Ham_CS_RoundRespawn , id );
 	return PLUGIN_HANDLED;
 }
+
+
+public SaveMenu(id)
+{
+	new title[128];
+	formatex(title, charsmax(title), "\r[FWO] \d- \wStartpoint Menu");
+	new menu = menu_create(title, "SaveMenuHandler");
+
+	formatex(title, charsmax(title), "\wSave Startpoint \d- %s", isStartSaved[id] ? "\y[Saved]" : "\r[Not Saved]");
+	menu_additem(menu, title, "1")
+
+	formatex(title, charsmax(title), "\wDelete Startpoint");
+	menu_additem(menu, title, "2")
+
+	formatex(title, charsmax(title), "\wStart");
+	menu_additem(menu, title, "3")
+
+	menu_setprop(menu, MPROP_EXIT, MEXIT_ALL)
+	menu_display(id, menu, 0);
+}
+
+public SaveMenuHandler(id, menu, item)
+{
+	if( item == MENU_EXIT )
+	{
+		menu_destroy(menu);
+		return PLUGIN_HANDLED;
+	}
+ 
+	switch(item)
+	{
+		case 0:
+		{
+			SaveStart(id)
+			SaveMenu(id);
+		}
+		case 1:
+		{
+			ResetStart(id);
+			SaveMenu(id);
+		}
+		case 2:
+		{
+			Start(id);
+			SaveMenu(id);
+		}
+	}
+	return PLUGIN_HANDLED;
+}
+
 
 public szSaveStatus(id){
 	isStartSaved[id] = (isStartSaved[id] != false) ? false : true;

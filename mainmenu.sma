@@ -18,21 +18,12 @@ public plugin_init()
 
 	register_clcmd( "say /menu", "bhop_menu" ); 
 	register_clcmd( "chooseteam", "bhop_menu" );
-	register_clcmd("say /savemenu", "save_menu" );
-	register_clcmd("say /sv", "save_menu" );
-	register_clcmd("say /sm", "save_menu" );
 }
 
 public plugin_natives(){
 	register_library("mainmenu");
-
-	register_native("open_savemenu", "native_save_menu");
 }
 
-public native_save_menu(numParams){
-	new id = get_param(1);
-	save_menu(id);
-}
 
 public client_putinserver(id)
 {
@@ -72,7 +63,7 @@ public MenuHandler(id , menu, item)
  
 	switch(item)
 	{
-		case 0: save_menu(id);
+		case 0: open_save_menu(id);
 		case 1: open_top_menu(id);
 		case 2: open_cat_menu(id);
 		case 3: open_bot_menu(id);
@@ -89,53 +80,5 @@ public MenuHandler(id , menu, item)
 	}
 
 	menu_destroy(menu);
-	return PLUGIN_HANDLED;
-}
-
-public save_menu(id)
-{
-	new title[128];
-	formatex(title, charsmax(title), "\r[FWO] \d- \wStartpoint Menu");
-	new menu = menu_create(title, "SaveMenuHandler");
-
-	formatex(title, charsmax(title), "\wSave Startpoint \d- %s", get_bool_save_point(id) ? "\y[Saved]" : "\r[Not Saved]");
-	menu_additem(menu, title, "1")
-
-	formatex(title, charsmax(title), "\wDelete Startpoint");
-	menu_additem(menu, title, "2")
-
-	formatex(title, charsmax(title), "\wStart");
-	menu_additem(menu, title, "3")
-
-	menu_setprop(menu, MPROP_EXIT, MEXIT_ALL)
-	menu_display(id, menu, 0);
-}
-
-public SaveMenuHandler(id, menu, item)
-{
-	if( item == MENU_EXIT )
-	{
-		menu_destroy(menu);
-		return PLUGIN_HANDLED;
-	}
- 
-	switch(item)
-	{
-		case 0:
-		{
-			get_user_save_point(id);
-			save_menu(id);
-		}
-		case 1:
-		{
-			reset_save_player(id);
-			save_menu(id);
-		}
-		case 2:
-		{
-			spawn_player(id);
-			save_menu(id);
-		}
-	}
 	return PLUGIN_HANDLED;
 }
