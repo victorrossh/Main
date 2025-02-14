@@ -45,14 +45,14 @@ public plugin_init()
 
 	register_message(get_user_msgid("StatusIcon"), "MessageStatusIcon");
 
-	register_clcmd( "say /start", "Start" );
+	register_clcmd( "say /start", "Start");
+	register_clcmd( "start", "Start")
 	register_clcmd( "say /reset", "ResetStart");
-	register_clcmd( "save", "SaveStart");
-	register_clcmd( "say /save", "SaveMenu" );
 
-	register_clcmd("say /savemenu", "SaveMenu" );
-	register_clcmd("say /sv", "SaveMenu" ); // ?? sv?
-	register_clcmd("say /sm", "SaveMenu" );
+	register_clcmd( "save", "SaveStart");
+	register_clcmd( "say /save", "SaveMenu");
+	register_clcmd( "say /savemenu", "SaveMenu");
+	register_clcmd( "say /sm", "SaveMenu");
 
 	register_clcmd( "say /respawn", "Respawn");
 
@@ -80,7 +80,7 @@ public plugin_natives(){
 
 	register_native("spawn_player", "native_spawn_player");
 	register_native("reset_save_player", "native_save_player");
-	register_native("open_save_menu", "native_open_save_menu"); // GET??? What do you mean GET? you SET the save point
+	register_native("open_save_menu", "native_open_save_menu");
 }
 
 public native_spawn_player(numParams){
@@ -97,7 +97,6 @@ public native_open_save_menu(numParams){
 	new id = get_param(1);
 	SaveMenu(id);
 }
-
 
 public client_putinserver(id){
 	start_position[id][0] = 0;
@@ -155,7 +154,6 @@ public Killed(id){
 
 	return HAM_SUPERCEDE;
 }
-
 
 public Start(id){
 	if (cs_get_user_team(id) == CS_TEAM_CT){
@@ -221,7 +219,6 @@ public ResetStart(id){
 	return PLUGIN_HANDLED;
 }
 
-
 public SaveMenu(id)
 {
 	new title[128];
@@ -269,7 +266,6 @@ public SaveMenuHandler(id, menu, item)
 	}
 	return PLUGIN_HANDLED;
 }
-
 
 public szSaveStatus(id){
 	isStartSaved[id] = (isStartSaved[id] != false) ? false : true;
@@ -336,6 +332,7 @@ stock FixCrosshair( id )
 	write_byte( 0 ); 
 	message_end( ); 
 } 
+
 stock get_random_player(){
 	for(new i = 1; i<33; i++)
 		if(is_user_connected(i) && is_user_alive(i))
