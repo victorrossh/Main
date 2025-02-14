@@ -71,7 +71,7 @@ public MenuHandler(id , menu, item)
 		case 5: invis_menu(id);
 		case 6: open_hud_menu(id);
 		case 7: open_medals_menu(id);
-		case 8: motd_commands(id);
+		case 8: client_cmd(id, "say /help");
 		case 9:
 		{
 			menu_destroy(menu);

@@ -49,7 +49,7 @@ public plugin_init()
 	register_clcmd( "start", "Start")
 	register_clcmd( "say /reset", "ResetStart");
 
-	register_clcmd( "save", "SaveStart");
+	register_clcmd( "savepos", "SaveStart");
 	register_clcmd( "say /save", "SaveMenu");
 	register_clcmd( "say /savemenu", "SaveMenu");
 	register_clcmd( "say /sm", "SaveMenu");
