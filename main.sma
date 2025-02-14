@@ -168,6 +168,8 @@ public Start(id){
 			set_user_velocity(id, start_velocity[id]);
 		}
 	}
+
+	return PLUGIN_HANDLED;
 }
 
 public Respawn(id){
