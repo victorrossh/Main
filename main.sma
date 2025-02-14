@@ -233,11 +233,13 @@ public SaveMenu(id)
 	formatex(title, charsmax(title), "\wDelete Startpoint");
 	menu_additem(menu, title, "2")
 
-	formatex(title, charsmax(title), "\wStart");
+	formatex(title, charsmax(title), "\wStart^n");
 	menu_additem(menu, title, "3")
 
 	formatex(title, charsmax(title), "\rNEW BIND!!! \wbind key savepos");
 	menu_additem(menu, title, "4")
+	formatex(title, charsmax(title), "\rCHECK \w/help");
+	menu_additem(menu, title, "5")
 
 	menu_setprop(menu, MPROP_EXIT, MEXIT_ALL)
 	menu_display(id, menu, 0);
