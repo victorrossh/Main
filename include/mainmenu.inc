@@ -1,0 +1,1 @@
+native open_savemenu(id);

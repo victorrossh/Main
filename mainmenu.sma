@@ -19,6 +19,19 @@ public plugin_init()
 	register_clcmd( "say /menu", "bhop_menu" ); 
 	register_clcmd( "chooseteam", "bhop_menu" );
 	register_clcmd("say /savemenu", "save_menu" );
+	register_clcmd("say /sv", "save_menu" );
+	register_clcmd("say /sm", "save_menu" );
+}
+
+public plugin_natives(){
+	register_library("mainmenu");
+
+	register_native("open_savemenu", "native_save_menu");
+}
+
+public native_save_menu(numParams){
+	new id = get_param(1);
+	save_menu(id);
 }
 
 public client_putinserver(id)
