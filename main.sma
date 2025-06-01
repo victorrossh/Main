@@ -101,11 +101,13 @@ public native_open_save_menu(numParams){
 public client_putinserver(id){
 	start_position[id][0] = 0;
 	used_save[id] = false;
+	isStartSaved[id] = false;
 }
 
 public client_disconnected(id){
 	start_position[id][0] = 0;
 	used_save[id] = false;
+	isStartSaved[id] = false;
 }
 
 public timer_player_category_changed(id){
