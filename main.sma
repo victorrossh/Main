@@ -46,10 +46,13 @@ public plugin_init()
 	register_message(get_user_msgid("StatusIcon"), "MessageStatusIcon");
 
 	register_clcmd( "say /start", "Start");
-	register_clcmd( "start", "Start")
+	register_clcmd( "start", "Start");
+
 	register_clcmd( "say /reset", "ResetStart");
 
 	register_clcmd( "savepos", "SaveStart");
+	register_clcmd( "say /savepos", "SaveStart");
+
 	register_clcmd( "say /save", "SaveMenu");
 	register_clcmd( "say /savemenu", "SaveMenu");
 	register_clcmd( "say /sm", "SaveMenu");
@@ -59,6 +62,7 @@ public plugin_init()
 	register_clcmd( "say /spec", "Spec");
 	register_clcmd( "say /back", "Spec");
 	register_clcmd( "say /ct", "Spec");
+	
 	register_clcmd( "say /usp", "GiveWeapons");
 
 	register_concmd("radio1", "hook_radio");
