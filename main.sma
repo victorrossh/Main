@@ -7,7 +7,6 @@
 #include <engine>
 #include <cromchat2>
 #include <timer>
-#include <hamsandwich>
 
 #define PLUGIN "Main bhop"
 #define VERSION "1.0"
